@@ -20,6 +20,8 @@
   }
 }
 
+
+
 /* Button container */
 .city-nav {
   display: flex;
@@ -69,6 +71,36 @@ html {
 
 *, *::before, *::after {
   box-sizing: inherit;
+}
+
+#big-box {
+  /* top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 2rem;
+  margin: 0;
+  color: #f5f5f5;
+  min-height: 17vh;
+  overflow: hidden;
+  position: relative;
+  background: rgba(0, 0, 0, 0.5); 
+  backdrop-filter: blur(8px);
+  flex-direction: column; */
+  position: relative;
+}
+
+#big-box::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 30%, #92B3C9, transparent 40%),
+              radial-gradient(circle at 80% 20%, #C6D1D1, transparent 40%),
+              radial-gradient(circle at 30% 70%, #F96656, transparent 40%),
+              radial-gradient(circle at 70% 80%, #7B8e54, transparent 40%);
+  filter: blur(80px);
+  z-index: -1000;
 }
 
 #top-box {
@@ -243,6 +275,57 @@ body {
   background: var(--bg-color);
   line-height: 1.5;
   margin: 0;
+}
+
+body::before{
+    content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 30%, #92B3C9, transparent 40%),
+              radial-gradient(circle at 80% 20%, #C6D1D1, transparent 40%),
+              radial-gradient(circle at 30% 70%, #F96656, transparent 40%),
+              radial-gradient(circle at 70% 80%, #7B8e54, transparent 40%);
+  filter: blur(80px);
+  z-index: -1000;
+}
+
+html {
+  height: 100%;
+  background-color: #111;
+  color: #fff;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+  padding: 0;
+}
+
+/* Headline (Sunny, Warm, 28°C) */
+h1 {
+  font-size: 3rem;   /* base size */
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+/* Subtext (It's Melbourne...) */
+p {
+  font-size: 1.4rem; /* much larger for readability */
+  font-weight: 600;
+  line-height: 1.6;
+  margin-bottom: 0.7rem;
+  text-align: left;
+}
+
+/* Responsive scaling */
+@media (max-width: 500px) {
+  h1 {
+    font-size: 3.5rem; /* bigger headline on phones */
+  }
+
+  p {
+    font-size: 1.6rem; /* bigger subtext */
+  }
 }
 
 h1, h2 {
