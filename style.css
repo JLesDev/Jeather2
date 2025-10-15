@@ -209,18 +209,20 @@ body {
   /* background: var(--bg-color); */
   line-height: 1.5;
   margin: 0;
+  overflow-x: hidden;
 }
 
 body::before{
-    content: "";
-  position: absolute;
+  content: "";
+  position: fixed;
   inset: 0;
   background: radial-gradient(circle at 20% 30%, #92B3C9, transparent 40%),
               radial-gradient(circle at 80% 20%, #C6D1D1, transparent 40%),
               radial-gradient(circle at 30% 70%, #F96656, transparent 40%),
               radial-gradient(circle at 70% 80%, #7B8e54, transparent 40%);
   filter: blur(80px);
-  z-index: -1000;
+  z-index: -1;
+  pointer-events: none;
 }
 
 html {
