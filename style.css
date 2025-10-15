@@ -216,10 +216,10 @@ body::before{
   content: "";
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle at 20% 30%, #92B3C9, transparent 40%),
-              radial-gradient(circle at 80% 20%, #C6D1D1, transparent 40%),
-              radial-gradient(circle at 30% 70%, #F96656, transparent 40%),
-              radial-gradient(circle at 70% 80%, #7B8e54, transparent 40%);
+  background: radial-gradient(circle at 20% 30%, #537083, transparent 40%),
+              radial-gradient(circle at 80% 20%, #566464, transparent 40%),
+              radial-gradient(circle at 30% 70%, #e08278, transparent 40%),
+              radial-gradient(circle at 70% 80%, #49572d, transparent 40%);
   filter: blur(80px);
   z-index: -1;
   pointer-events: none;
@@ -227,8 +227,9 @@ body::before{
 
 html {
   height: 100%;
-  background-color: #111;
-  color: #fff;
+  /* background-color: #333333; */
+  color: #707070;
+  position: relative;
   font-family: 'Helvetica Neue', Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   margin: 0;
