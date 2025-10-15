@@ -23,13 +23,14 @@
 /* Button container */
 .city-nav {
   display: flex;
-  gap: 1rem;
+  gap: 0.7rem;
 }
+
 
 /* Stylish buttons */
 .city-btn {
   padding: 0.6rem 1.2rem;
-  font-size: 1rem;
+  font-size: 1.8rem;
   font-weight: 600;
   border: none;
   border-radius: 999px; /* pill shape */
@@ -101,6 +102,25 @@ html {
   z-index: -1000;
 }
 
+
+
+#content {
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0rem 2rem;
+  margin: 0;
+  /*background: #0a0a0a;  base dark background */
+  color: #f5f5f5;
+  min-height: 17vh;
+  overflow: hidden;
+  position: relative;
+  backdrop-filter: blur(8px);
+  flex-direction: column;
+
+}
+
 #top-box {
   top: 0;
   z-index: 1000;
@@ -132,12 +152,18 @@ html {
   z-index: -1;
 }
 
+#placeholder2 {
+  padding: 2rem;
+  display: flex;
+  align-items: left;
+}
+
 #bot-box {
   /* top: 0; */
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 20%;
+  height: 10%;
   position: fixed;
   z-index: 1000;
   display: flex;
@@ -207,18 +233,17 @@ html {
   padding: 0;
 }
 
-/* Headline (Sunny, Warm, 28°C) */
 h1 {
-  font-size: 3rem;   /* base size */
+  padding: 1rem;
+  font-size: 4.5rem;
   font-weight: 800;
   line-height: 1.2;
   margin-bottom: 2rem;
   text-align: left;
 }
 
-/* Subtext (It's Melbourne...) */
 p {
-  font-size: 1.4rem; /* much larger for readability */
+  font-size: 3rem;
   font-weight: 600;
   line-height: 1.6;
   margin-bottom: 0.7rem;

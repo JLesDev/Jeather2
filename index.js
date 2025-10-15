@@ -27,7 +27,7 @@ window.mutate_chart_object = function (v) {
 };
 
 function cityText(city){
-  let parent = document.querySelector('#placeholder2');
+  let parent = document.querySelector('#content2');
   switch(city){
     case 0:
       parent.textContent = "Melbourne";
@@ -101,7 +101,7 @@ async function run(city) {
       
       let ci = observations.data[0].temp; //3
       let ci2 = observations.data[0].temp_feels_like;
-      let parent = document.querySelector('#placeholder2');
+      let parent = document.querySelector('#content2');
       const barColors = ["red", "green","blue","orange","brown"];
       
       console.log("jo test" + window.callbacks.show_line_ticks);
@@ -177,11 +177,27 @@ async function run(city) {
             break;
         }
         console.log("formatTime = "+formatTime);
-p.textContent = formatTime + ". Temp: " + observations.data[i].temp + "°C. Jonty's Temp: " + (observations.data[i].temp_feels_like + 3)+"°C.";
+        p.textContent = formatTime + ". Temp: " + observations.data[i].temp + "°C. Jonty's Temp: " + (observations.data[i].temp_feels_like + 3)+"°C.";
 	      parent.appendChild(p);
-                let q = document.createElement('p');
-        q.textContent = "UV: " + observations.data[i].uv + ". Humidity: " + (observations.data[i].relative_humidity)+ "%. Is it raining? Not quite sure.";
+        let q = document.createElement('p');
+        q.textContent = "UV: " + observations.data[i].uv + "."
+        let uv = document.createElement('p');
+         uv.textContent = "Humidity: " + (observations.data[i].relative_humidity)+ "%.";
+        let wind_dir = "South";
+        // switch ((observations.data[i].wind.direction)){
+        //   "S"
+        // }
+        let wind = document.createElement('p');
+        wind.textContent = "Wind: " + (observations.data[i].wind.speed_kilometre) + "km/h " + (observations.data[i].wind.direction);
+        let rain = document.createElement('p');
+        rain.textContent = "Rain: " + ((observations.data[i].rain.amount.min + observations.data[i].rain.amount.max)/2) + "mm";
+        
         parent.appendChild(q);
+        parent.appendChild(uv);
+        parent.appendChild(wind);
+        parent.appendChild(rain);
+
+        // console.log(observations.data[i])
       }
 
       for (let i = 24; i > -1; i--){
@@ -297,7 +313,7 @@ p.textContent = formatTime + ". Temp: " + observations.data[i].temp + "°C. Jont
       
       let ci = observations.data[0].temp; //3
       let ci2 = observations.data[0].temp_feels_like;
-      let parent = document.querySelector('#placeholder2');
+      let parent = document.querySelector('#content2');
       const barColors = ["red", "green","blue","orange","brown"];
       
       console.log("jo test" + window.callbacks.show_line_ticks);
@@ -480,22 +496,6 @@ p.textContent = formatTime + ". Temp: " + observations.data[i].temp + "°C. Jont
 
     }
     );
-
-  //  function addData(chart, label, newData) {
-  //       chart.data.labels.push(label);
-  //       chart.data.datasets.forEach((dataset) => {
-  //           dataset.data.push(newData);
-  //       });
-  //       chart.update();
-  //     }
-
-      // function removeData(chart) {
-      //   chart.data.labels.pop();
-      //   chart.data.datasets.forEach((dataset) => {
-      //       dataset.data.pop();
-      //   });
-      //   chart.update();
-      // }
  
       const plugin = {
         id: 'customCanvasBackgroundColor',
