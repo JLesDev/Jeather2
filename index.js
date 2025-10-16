@@ -59,16 +59,29 @@ async function getQuotes() {
   return quotesJSON["quotes"];
 }
 
-async function quoteList() {
-  // let quotes = await getQuotes();
-  // return quotes;
-  const res = await fetch("quotes.json");
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const text = await res.text();
-  console.log(text);
-  const data = JSON.parse(text);
-  return text;
+async function getAverages() {
+  const baseURL = window.location.origin;
+  //const requestURL = baseURL + "/Jeather2/averages.json";
+  // For local hosting: 
+  const requestURL = "http://127.0.0.1:5500/averages.json";
+  const request = new Request(requestURL);
+  const response = await fetch(request);
+  let averagesJSON = await response.json();
+  return averagesJSON;
 }
+
+let averages = await getAverages();
+
+// async function quoteList() {
+//   // let quotes = await getQuotes();
+//   // return quotes;
+//   const res = await fetch("averages.json");
+//   if (!res.ok) throw new Error(`HTTP ${res.status}`);
+//   const text = await res.text();
+//   console.log(text);
+//   const data = JSON.parse(text);
+//   return text;
+// }
 
 let quotes = [
   "If you’re offered a seat on a rocket ship, don’t ask what seat! Just get on. Sheryl Sandberg"
@@ -239,6 +252,7 @@ async function run(city) {
   //location.reload();
   await init();
   randomQuote();
+  console.log(averages);
   doSomething();
   let a = await call_prog();
   console.log(a);
@@ -379,10 +393,23 @@ async function run(city) {
         wind.textContent = "Wind: " + (observations.data[i].wind.speed_kilometre) + "km/h " + (observations.data[i].wind.direction);
         let rain = document.createElement('p');
         rain.textContent = "Rain: " + ((observations.data[i].rain.amount.min + observations.data[i].rain.amount.max) / 2) + "mm";
+        
+        let averageDiff = observations.data[i].temp - averages.averages[0].month[10];
+        let avg = document.createElement('h1');
+        let brk = document.createElement('hr');
+        if(averageDiff > 0){
+          avg.textContent = "This day is hotter than average by " + averageDiff + "°C.";
+        } 
+        else {
+          avg.textContent = "This day is cooler than average by " + averageDiff + "°C.";
+        }
+
         parent.appendChild(q);
         parent.appendChild(uv);
         parent.appendChild(wind);
         parent.appendChild(rain);
+        parent.appendChild(brk);
+        parent.appendChild(avg);
 
         // console.log(observations.data[i])
       }
