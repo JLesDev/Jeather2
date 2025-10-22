@@ -209,7 +209,6 @@ let quotes = [
 function randomQuote() {
   let parent2 = document.getElementById('bot-box');
   let randomInt = Math.floor(Math.random() * 47);
-  console.log(quotes[randomInt]);
   let actual = document.createElement('p');
   actual.textContent = quotes[randomInt];
   parent2.appendChild(actual);
@@ -217,9 +216,7 @@ function randomQuote() {
 async function run(city) {
   await init();
   randomQuote();
-  console.log(averages);
   let a = await call_prog();
-  console.log(a);
   //test("https://reg.bom.gov.au/fwo/IDV60901/IDV60901.95936.json");
   const url = "https://api.weather.bom.gov.au/v1/locations/r1r143/forecasts/hourly";
   const urls = [
@@ -246,8 +243,6 @@ async function run(city) {
     body: JSON.stringify(url2),
   };
 
-  // console.log(response);
-
   const xValues = [];
   const yValues = [];
   const xValues2 = [];
@@ -258,17 +253,11 @@ async function run(city) {
   await fetch(String(urls[0])) //1
     .then((response) => response.json()) //2
     .then((observations) => {
-      // console.log(observations);
-      // console.log(observations.data[0].temp);
-      // console.log(observations.notice);
-      // console.log("test");
 
       let ci = observations.data[0].temp; //3
       let ci2 = observations.data[0].temp_feels_like;
       let parent = document.querySelector('#content2');
       const barColors = ["red", "green", "blue", "orange", "brown"];
-
-      // console.log("jo test" + window.callbacks.show_line_ticks);
 
       for (let i = 0; i < 1; i++) {
         let ci = observations.data[i].temp;
