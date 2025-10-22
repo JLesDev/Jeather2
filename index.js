@@ -1,15 +1,8 @@
 import init, { /*get_weather_name, get_url,*/ call_prog, show_line_ticks } from './pkg/hot_or_not_3.js';
 await init();
 
-// src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js";
-
 import * as root from './pkg/hot_or_not_3.js'
 
-//const cors = require('cors');
-
-//app.use(cors());
-
-// myChart.destroy();
 window.callbacks = root;
 console.log("test");
 console.log(window.callbacks);
@@ -22,7 +15,6 @@ window.mutate_chart_object = function (v) {
         }
     };
   }
-  //v.destroy();
   return v
 };
 
@@ -261,20 +253,14 @@ async function run(city) {
 
       for (let i = 0; i < 1; i++) {
         let ci = observations.data[i].temp;
-
         let p = document.createElement('p');
         let timer = new Date();
         let realtimer = new Date(observations.data[i].time);
-        // console.log(realtimer);
         let now = new Date();
         let currentTime = realtimer.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        // console.log(currentTime.getHours);
-        // console.log(`Current Time: ${currentTime}`);
         let nozero = realtimer.getHours().toString();
         let nonzero = nozero.replace(/^0+/, '');
-        // console.log(nonzero + ":" + realtimer.getMinutes());
         let formatTime = nozero;
-        // console.log("nozerotime = " + nozero.toString());
         let date = new Date();
         let dateform = date.toLocaleDateString();
         switch (nozero.toString()) {
@@ -329,7 +315,6 @@ async function run(city) {
             defualt: "Unknown time!";
             break;
         }
-        // console.log("formatTime = " + formatTime);
         p.textContent = formatTime + ". Temp: " + observations.data[i].temp + "°C. Jonty's Temp: " + (observations.data[i].temp_feels_like + 3) + "°C.";
         parent.appendChild(p);
         let q = document.createElement('p');
@@ -338,10 +323,12 @@ async function run(city) {
         uv.textContent = "Humidity: " + (observations.data[i].relative_humidity) + "%.";
         let wind_dir = "South";
 
-        // for direction formatting
+        // for direction formatting --
+
         // switch ((observations.data[i].wind.direction)){
         //   "S"
         // }
+
         let wind = document.createElement('p');
         wind.textContent = "Wind: " + (observations.data[i].wind.speed_kilometre) + "km/h " + (observations.data[i].wind.direction);
         let rain = document.createElement('p');
@@ -363,8 +350,6 @@ async function run(city) {
         parent.appendChild(rain);
         parent.appendChild(brk);
         parent.appendChild(avg);
-
-        // console.log(observations.data[i])
       }
 
       for (let i = 24; i > -1; i--) {
@@ -375,21 +360,18 @@ async function run(city) {
         if (ci > maxer) {
           maxer = ci;
         }
-        // console.log(ci);
+
         let p = document.createElement('p');
-        //let timer = new Date(observations.data[i].time);
+
         let timer = new Date();
         let realtimer = new Date(observations.data[i].time);
-        // console.log(realtimer);
+   
         let now = new Date();
         let currentTime = realtimer.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        // console.log(currentTime.getHours);
-        // console.log(`Current Time: ${currentTime}`);
+  
         let nozero = realtimer.getHours().toString();
         let nonzero = nozero.replace(/^0+/, '');
-        // console.log(nonzero + ":" + realtimer.getMinutes());
-        //p.textContent = currentTime + ". Temp: " + observations.data[i].temp + "°C. Jonty's Temp: " + observations.data[i].temp_feels_like;
-
+        
         yValues[i] = observations.data[i].temp;
 
         let formatdate = new Date();
@@ -402,202 +384,6 @@ async function run(city) {
           let formatTime = nozero;
           switch (nozero.toString()) {
             case "0": formatTime = nextdate;
-              break;
-            case "1": formatTime = "1am";
-              break;
-            case "2": formatTime = "2am";
-              break;
-            case "3": formatTime = "3am";
-              break;
-            case "4": formatTime = "4am";
-              break;
-            case "5": formatTime = "5am";
-              break;
-            case "6": formatTime = "6am";
-              break;
-            case "7": formatTime = "7am";
-              break;
-            case "8": formatTime = "8am";
-              break;
-            case "9": formatTime = "9am";
-              break;
-            case "10": formatTime = "10am";
-              break;
-            case "11": formatTime = "11am";
-              break;
-            case "12": formatTime = "12pm";
-              break;
-            case "13": formatTime = "1pm";
-              break;
-            case "14": formatTime = "2pm";
-              break;
-            case "15": formatTime = "3pm";
-              break;
-            case "16": formatTime = "4pm";
-              break;
-            case "17": formatTime = "5pm";
-              break;
-            case "18": formatTime = "6pm";
-              break;
-            case "19": formatTime = "7pm";
-              break;
-            case "20": formatTime = "8pm";
-              break;
-            case "21": formatTime = "9pm";
-              break;
-            case "22": formatTime = "10pm";
-              break;
-            case "23": formatTime = "11pm";
-              break;
-              defualt: "Unknown time!";
-              break;
-          };
-          xValues[i] = formatTime;
-        }
-
-        parent.appendChild(p);
-      }
-
-
-    }
-
-
-    )
-    .then((temp) => {
-
-    }
-    );
-
-
-
-  await fetch(String(urls[0])) //1
-    .then((response) => response.json()) //2
-    .then((observations) => {
-      // console.log(observations);
-      // console.log(observations.data[0].temp);
-      // console.log(observations.notice);
-      // console.log("test");
-
-      let ci = observations.data[0].temp; //3
-      let ci2 = observations.data[0].temp_feels_like;
-      let parent = document.querySelector('#content2');
-      const barColors = ["red", "green", "blue", "orange", "brown"];
-
-      // console.log("jo test" + window.callbacks.show_line_ticks);
-
-
-      for (let i = 0; i < 1; i++) {
-
-
-
-        let ci = observations.data[i].temp;
-
-        let p = document.createElement('p');
-        let timer = new Date();
-        let realtimer = new Date(observations.data[i].time);
-        // console.log(realtimer);
-        let now = new Date();
-        let currentTime = realtimer.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        // console.log(currentTime.getHours);
-        // console.log(`Current Time: ${currentTime}`);
-        let nozero = realtimer.getHours().toString();
-        let nonzero = nozero.replace(/^0+/, '');
-        // console.log(nonzero + ":" + realtimer.getMinutes());
-        let formatTime = nozero;
-        // console.log("nozerotime = " + nozero.toString());
-        let date = new Date();
-        //let nextdate = 
-        let dateform = date.toLocaleDateString();
-        switch (nozero.toString()) {
-          case "0": formatTime = dateform;
-            break;
-          case "1": formatTime = "1am";
-            break;
-          case "2": formatTime = "2am";
-            break;
-          case "3": formatTime = "3am";
-            break;
-          case "4": formatTime = "4am";
-            break;
-          case "5": formatTime = "5am";
-            break;
-          case "6": formatTime = "6am";
-            break;
-          case "7": formatTime = "7am";
-            break;
-          case "8": formatTime = "8am";
-            break;
-          case "9": formatTime = "9am";
-            break;
-          case "10": formatTime = "10am";
-            break;
-          case "11": formatTime = "11am";
-            break;
-          case "12": formatTime = "12pm";
-            break;
-          case "13": formatTime = "1pm";
-            break;
-          case "14": formatTime = "2pm";
-            break;
-          case "15": formatTime = "3pm";
-            break;
-          case "16": formatTime = "4pm";
-            break;
-          case "17": formatTime = "5pm";
-            break;
-          case "18": formatTime = "6pm";
-            break;
-          case "19": formatTime = "7pm";
-            break;
-          case "20": formatTime = "8pm";
-            break;
-          case "21": formatTime = "9pm";
-            break;
-          case "22": formatTime = "10pm";
-            break;
-          case "23": formatTime = "11pm";
-            break;
-            defualt: "Unknown time!";
-            break;
-        }
-        // console.log("formatTime = " + formatTime);
-        //p.textContent = formatTime + ". Temp: " + observations.data[i].temp + "°C. Jonty's Temp: " + observations.data[i].temp_feels_like+"°C.";
-        parent.appendChild(p);
-      }
-
-      for (let i = 24; i > -1; i--) {
-        let ci = observations.data[i].temp;
-
-        // console.log(ci);
-        let p = document.createElement('p');
-        let realtimer = new Date(observations.data[i].time);
-        // console.log(realtimer);
-        let now = new Date();
-        let currentTime = realtimer.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        // console.log(currentTime.getHours);
-        // console.log(`Current Time: ${currentTime}`);
-        let nozero = realtimer.getHours().toString();
-        let nonzero = nozero.replace(/^0+/, '');
-        // console.log(nonzero + ":" + realtimer.getMinutes());
-        //p.textContent = currentTime + ". Temp: " + observations.data[i].temp + "°C. Jonty's Temp: " + observations.data[i].temp_feels_like;
-
-        yValues2[i] = observations.data[i].temp;
-        let formatdate = new Date();
-        //let nextdate = new Date();
-        //nextdate = setDate(formatdate.getDate() + 1);
-        let nextdate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
-        // console.log(nextdate);
-        var options = { day: 'numeric', month: 'long' };
-        let noyear = (nextdate.toLocaleDateString('en-US', options)).toString();
-        // console.log(formatdate.toLocaleDateString('en-US', options));
-
-        if (observations.data[i].time === "undefined") {
-          xValues[i] = "Not found";
-        }
-        else {
-          let formatTime = nozero;
-          switch (nozero.toString()) {
-            case "0": formatTime = noyear;
               break;
             case "1": formatTime = "1am";
               break;
@@ -678,7 +464,6 @@ async function run(city) {
 
   new Chart("myChart", {
     type: "line",
-    //title: "hi",
     data: {
       labels: xValues,
       datasets: [{
