@@ -48,17 +48,6 @@ function cityText(city) {
 let miner = 999;
 let maxer = -999;
 
-async function getQuotes() {
-  const baseURL = window.location.origin;
-  //const requestURL = baseURL + "/Jeather2/quotes.json";
-  // For local hosting: 
-  const requestURL = "http://127.0.0.1:5500/quotes.json";
-  const request = new Request(requestURL);
-  const response = await fetch(request);
-  let quotesJSON = await response.json();
-  return quotesJSON["quotes"];
-}
-
 async function getAverages() {
   const baseURL = window.location.origin;
   const requestURL = baseURL + "/Jeather2/averages.json";
@@ -71,17 +60,6 @@ async function getAverages() {
 }
 
 let averages = await getAverages();
-
-// async function quoteList() {
-//   // let quotes = await getQuotes();
-//   // return quotes;
-//   const res = await fetch("averages.json");
-//   if (!res.ok) throw new Error(`HTTP ${res.status}`);
-//   const text = await res.text();
-//   console.log(text);
-//   const data = JSON.parse(text);
-//   return text;
-// }
 
 let quotes = [
   "If you’re offered a seat on a rocket ship, don’t ask what seat! Just get on. Sheryl Sandberg"
@@ -236,24 +214,10 @@ function randomQuote() {
   actual.textContent = quotes[randomInt];
   parent2.appendChild(actual);
 }
-
-// async function appendQuote() {
-//   let parent2 = document.getElementById('bot-box');
-//   let quotes = await getQuotes();
-//   //let quotes2 = quoteList().await;
-//   let randomInt = Math.floor(Math.random() * 20);
-//   console.log(quotes);
-//   let actual = document.createElement('p');
-//   actual.textContent = quotes[randomInt].quote;
-//   parent2.appendChild(actual);
-// }
-
 async function run(city) {
-  //location.reload();
   await init();
   randomQuote();
   console.log(averages);
-  doSomething();
   let a = await call_prog();
   console.log(a);
   //test("https://reg.bom.gov.au/fwo/IDV60901/IDV60901.95936.json");
@@ -282,9 +246,7 @@ async function run(city) {
     body: JSON.stringify(url2),
   };
 
-  //document.body.textContent = "hi";
-
-  console.log(response);
+  // console.log(response);
 
   const xValues = [];
   const yValues = [];
@@ -296,17 +258,17 @@ async function run(city) {
   await fetch(String(urls[0])) //1
     .then((response) => response.json()) //2
     .then((observations) => {
-      console.log(observations);
-      console.log(observations.data[0].temp);
-      console.log(observations.notice);
-      console.log("test");
+      // console.log(observations);
+      // console.log(observations.data[0].temp);
+      // console.log(observations.notice);
+      // console.log("test");
 
       let ci = observations.data[0].temp; //3
       let ci2 = observations.data[0].temp_feels_like;
       let parent = document.querySelector('#content2');
       const barColors = ["red", "green", "blue", "orange", "brown"];
 
-      console.log("jo test" + window.callbacks.show_line_ticks);
+      // console.log("jo test" + window.callbacks.show_line_ticks);
 
       for (let i = 0; i < 1; i++) {
         let ci = observations.data[i].temp;
@@ -314,16 +276,16 @@ async function run(city) {
         let p = document.createElement('p');
         let timer = new Date();
         let realtimer = new Date(observations.data[i].time);
-        console.log(realtimer);
+        // console.log(realtimer);
         let now = new Date();
         let currentTime = realtimer.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        console.log(currentTime.getHours);
-        console.log(`Current Time: ${currentTime}`);
+        // console.log(currentTime.getHours);
+        // console.log(`Current Time: ${currentTime}`);
         let nozero = realtimer.getHours().toString();
         let nonzero = nozero.replace(/^0+/, '');
-        console.log(nonzero + ":" + realtimer.getMinutes());
+        // console.log(nonzero + ":" + realtimer.getMinutes());
         let formatTime = nozero;
-        console.log("nozerotime = " + nozero.toString());
+        // console.log("nozerotime = " + nozero.toString());
         let date = new Date();
         let dateform = date.toLocaleDateString();
         switch (nozero.toString()) {
@@ -378,7 +340,7 @@ async function run(city) {
             defualt: "Unknown time!";
             break;
         }
-        console.log("formatTime = " + formatTime);
+        // console.log("formatTime = " + formatTime);
         p.textContent = formatTime + ". Temp: " + observations.data[i].temp + "°C. Jonty's Temp: " + (observations.data[i].temp_feels_like + 3) + "°C.";
         parent.appendChild(p);
         let q = document.createElement('p');
@@ -386,6 +348,8 @@ async function run(city) {
         let uv = document.createElement('p');
         uv.textContent = "Humidity: " + (observations.data[i].relative_humidity) + "%.";
         let wind_dir = "South";
+
+        // for direction formatting
         // switch ((observations.data[i].wind.direction)){
         //   "S"
         // }
@@ -422,19 +386,19 @@ async function run(city) {
         if (ci > maxer) {
           maxer = ci;
         }
-        console.log(ci);
+        // console.log(ci);
         let p = document.createElement('p');
         //let timer = new Date(observations.data[i].time);
         let timer = new Date();
         let realtimer = new Date(observations.data[i].time);
-        console.log(realtimer);
+        // console.log(realtimer);
         let now = new Date();
         let currentTime = realtimer.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        console.log(currentTime.getHours);
-        console.log(`Current Time: ${currentTime}`);
+        // console.log(currentTime.getHours);
+        // console.log(`Current Time: ${currentTime}`);
         let nozero = realtimer.getHours().toString();
         let nonzero = nozero.replace(/^0+/, '');
-        console.log(nonzero + ":" + realtimer.getMinutes());
+        // console.log(nonzero + ":" + realtimer.getMinutes());
         //p.textContent = currentTime + ". Temp: " + observations.data[i].temp + "°C. Jonty's Temp: " + observations.data[i].temp_feels_like;
 
         yValues[i] = observations.data[i].temp;
@@ -520,17 +484,17 @@ async function run(city) {
   await fetch(String(urls[0])) //1
     .then((response) => response.json()) //2
     .then((observations) => {
-      console.log(observations);
-      console.log(observations.data[0].temp);
-      console.log(observations.notice);
-      console.log("test");
+      // console.log(observations);
+      // console.log(observations.data[0].temp);
+      // console.log(observations.notice);
+      // console.log("test");
 
       let ci = observations.data[0].temp; //3
       let ci2 = observations.data[0].temp_feels_like;
       let parent = document.querySelector('#content2');
       const barColors = ["red", "green", "blue", "orange", "brown"];
 
-      console.log("jo test" + window.callbacks.show_line_ticks);
+      // console.log("jo test" + window.callbacks.show_line_ticks);
 
 
       for (let i = 0; i < 1; i++) {
@@ -542,16 +506,16 @@ async function run(city) {
         let p = document.createElement('p');
         let timer = new Date();
         let realtimer = new Date(observations.data[i].time);
-        console.log(realtimer);
+        // console.log(realtimer);
         let now = new Date();
         let currentTime = realtimer.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        console.log(currentTime.getHours);
-        console.log(`Current Time: ${currentTime}`);
+        // console.log(currentTime.getHours);
+        // console.log(`Current Time: ${currentTime}`);
         let nozero = realtimer.getHours().toString();
         let nonzero = nozero.replace(/^0+/, '');
-        console.log(nonzero + ":" + realtimer.getMinutes());
+        // console.log(nonzero + ":" + realtimer.getMinutes());
         let formatTime = nozero;
-        console.log("nozerotime = " + nozero.toString());
+        // console.log("nozerotime = " + nozero.toString());
         let date = new Date();
         //let nextdate = 
         let dateform = date.toLocaleDateString();
@@ -607,7 +571,7 @@ async function run(city) {
             defualt: "Unknown time!";
             break;
         }
-        console.log("formatTime = " + formatTime);
+        // console.log("formatTime = " + formatTime);
         //p.textContent = formatTime + ". Temp: " + observations.data[i].temp + "°C. Jonty's Temp: " + observations.data[i].temp_feels_like+"°C.";
         parent.appendChild(p);
       }
@@ -615,17 +579,17 @@ async function run(city) {
       for (let i = 24; i > -1; i--) {
         let ci = observations.data[i].temp;
 
-        console.log(ci);
+        // console.log(ci);
         let p = document.createElement('p');
         let realtimer = new Date(observations.data[i].time);
-        console.log(realtimer);
+        // console.log(realtimer);
         let now = new Date();
         let currentTime = realtimer.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        console.log(currentTime.getHours);
-        console.log(`Current Time: ${currentTime}`);
+        // console.log(currentTime.getHours);
+        // console.log(`Current Time: ${currentTime}`);
         let nozero = realtimer.getHours().toString();
         let nonzero = nozero.replace(/^0+/, '');
-        console.log(nonzero + ":" + realtimer.getMinutes());
+        // console.log(nonzero + ":" + realtimer.getMinutes());
         //p.textContent = currentTime + ". Temp: " + observations.data[i].temp + "°C. Jonty's Temp: " + observations.data[i].temp_feels_like;
 
         yValues2[i] = observations.data[i].temp;
@@ -633,10 +597,10 @@ async function run(city) {
         //let nextdate = new Date();
         //nextdate = setDate(formatdate.getDate() + 1);
         let nextdate = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
-        console.log(nextdate);
+        // console.log(nextdate);
         var options = { day: 'numeric', month: 'long' };
         let noyear = (nextdate.toLocaleDateString('en-US', options)).toString();
-        console.log(formatdate.toLocaleDateString('en-US', options));
+        // console.log(formatdate.toLocaleDateString('en-US', options));
 
         if (observations.data[i].time === "undefined") {
           xValues[i] = "Not found";
@@ -731,27 +695,11 @@ async function run(city) {
       datasets: [{
         label: '',
         pointRadius: 0,
-        //color: "white",
-        borderColor: "pink",       // Line color
-        //backgroundColor: "black",   // Point color
-        //pointBackgroundColor: "black",
-        //pointBorderColor: "black",
+        borderColor: "pink",     
         fill: true,
         backgroundColor: 'rgba(85, 85, 85, 1)',
         data: yValues
       }
-        // {
-        //   label: "",
-        //   //color: "white",
-        //   borderColor: "lightGrey",       // Line color
-        //   //backgroundColor: "black",   // Point color
-        //   //pointBackgroundColor: "black",
-        //   //pointBorderColor: "black",
-        //   fill: true,
-        //   backgroundColor: 'rgba(85, 85, 85, 1)',
-        //   data: yValues2
-        // }
-
       ]
     },
     options: {
@@ -765,9 +713,7 @@ async function run(city) {
         enabled: false
       },
 
-      //backgroundColor: 'black',
       plugins: {
-        // maintainAspectRatio: false,
         customCanvasBackgroundColor: {
           color: '#121213',
         },
@@ -782,8 +728,6 @@ async function run(city) {
         display: false,
         fontColor: 'white',
         text: "yessir",
-        //text: observations.data[0].name + " temperature for " + observations.data[0].time,
-        //text: "WEATHER"
       },
       scales: {
         x: {
@@ -797,8 +741,6 @@ async function run(city) {
           max: maxer + 2,
           min: miner - 2,
           ticks: {
-            //labels: yValues + "cdcd",
-            //display: false,
             color: 'rgba(190, 190, 190, 1)'
           }
         },
@@ -807,41 +749,10 @@ async function run(city) {
 
     plugins: [plugin],
   });
-  //Chart.defaults.global.defautFontColor = 'white';
-
-  //removeData(myChart);
-  // myChart.destroy();
-  // addData(myChart, yValues, xValues);
-
 
   var z = document.createElement("h2");
   z.setAttribute("id", "placeholder");
   document.body.appendChild(z);
-
-  // var feels = document.createElement("h2");
-  // feels.setAttribute("id", "feels");
-  // document.getElementById("feels-div").appendChild(feels);
-  // document.getElementById("feels").textContent = "Feels like";
-
-
-
-
-  async function doSomething() {
-    // let result = await get_weather_name("London");
-    // console.log(result);
-    // return result;
-  }
-
-  // const address = get_weather_name("London")
-  //   .then((response) => get_weather_name("London"))
-  //   .then((user) => {
-  //     return user.name;
-  //   });
-
-  // const printAddress = async () => {
-  //   const a = await address;
-  //   console.log(a);
-  // };
 
   function readMore() {
     var dots = document.getElementById("dots");
@@ -858,9 +769,6 @@ async function run(city) {
       moreText.style.display = "inline";
     }
   }
-
-  // printAddress();
-
 }
 
 
@@ -876,7 +784,6 @@ function removeData(chart) {
 document.getElementById("melb").addEventListener("click", function (e) {
   runner(0);
   window.location.href = "index.html";
-  // removeData("myChart");
 });
 
 document.getElementById("adel").addEventListener("click", function (e) {
@@ -899,10 +806,6 @@ document.getElementById("more").addEventListener("click", function (e) {
   window.location.href = "more.html";
 });
 
-// document.getElementById("back").addEventListener("click", function (e) {
-//   runner(0);
-//   window.location.href = "index.html";
-// });
 
 
 function runner(city) {
@@ -914,4 +817,3 @@ function runner(city) {
 
 run(1);
 window.run = run;
-// location.reload();
