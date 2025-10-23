@@ -41,9 +41,9 @@
 
 .city-btn:hover,
 .city-btn:focus {
-  background: rgba(0, 255, 128, 0.2);
+  background: rgba(234, 0, 255, 0.2);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 255, 128, 0.3);
+  box-shadow: 0 6px 20px rgba(212, 0, 255, 0.3);
 }
 
 .city-btn:active {
