@@ -18,16 +18,11 @@
   }
 }
 
-
-
-/* Button container */
 .city-nav {
   display: flex;
   gap: 0.7rem;
 }
 
-
-/* Stylish buttons */
 .city-btn {
   padding: 0.6rem 1.2rem;
   font-size: 1.8rem;
