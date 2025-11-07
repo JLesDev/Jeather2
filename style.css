@@ -92,7 +92,6 @@ html {
   position: relative;
   backdrop-filter: blur(8px);
   flex-direction: column;
-
 }
 
 #top-box {
@@ -120,11 +119,6 @@ html {
   z-index: -1;
 }
 
-#placeholder2 {
-  padding: 2rem;
-  display: flex;
-  align-items: left;
-}
 
 #bot-box {
   /* top: 0; */
@@ -296,7 +290,6 @@ hr {
   border: 2px solid var(--fg-color);
 }
 
-/* Buttons */
 #readMoreButt,
 #startButton,
 .keyboard-button {
@@ -413,4 +406,117 @@ hr {
               radial-gradient(circle at 70% 80%, rgba(219, 219, 219, 0.781), transparent 40%);
   filter: blur(80px);
   z-index: -1;
+}
+
+@media (min-width: 800px) {
+  body {
+    /* max-width: 1200px; */
+    margin: 0 auto;
+    /* padding: 2rem 3rem; */
+  }
+
+  h1 {
+    font-size: 4rem;
+    text-align: center;
+  }
+
+  p {
+    font-size: 1.8rem;
+    max-width: 800px;
+    line-height: 1.8;
+    text-align: center;
+    margin: 1rem auto;
+  }
+
+  .city-nav {
+    justify-content: center;
+    gap: 1.2rem;
+  }
+
+  .city-btn {
+    font-size: 1.6rem;
+    padding: 0.8rem 2rem;
+  }
+
+  #top-box {
+    /* flex-direction: row; */
+    justify-content: space-between;
+    padding: 2rem 4rem;
+    min-height: 15vh;
+  }
+
+  #content {
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 3rem;
+    gap: 3rem;
+  }
+
+  #bot-box {
+    flex-direction: row;
+    justify-content: space-between;
+    /* padding: 2rem 4rem; */
+    padding: static;
+    gap: 3rem;
+  }
+
+  #more-box {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 3rem;
+  }
+
+  .letter-box {
+    width: 4.5rem;
+    height: 4.5rem;
+    font-size: 2.4rem;
+  }
+
+  #chart {
+    padding: 2rem;
+  }
+
+  #keyboard-cont {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 900px;
+    margin: 2rem auto;
+  }
+
+  .keyboard-button {
+    font-size: 1.1rem;
+    padding: 0.6rem 1.2rem;
+    min-width: 3rem;
+  }
+
+  #splash {
+    width: 40rem;
+    padding: 2.5rem;
+  }
+
+  #content {
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0rem 0rem;
+  margin: 0;
+  color: #f5f5f5;
+  min-height: 17vh;
+  overflow: hidden;
+  position: relative;
+  backdrop-filter: blur(8px);
+  flex-direction: column;
+  }
+
+  #placeholder2 {
+  padding: 0.5rem 4rem;
+  display: flex;
+  align-items: left;
+  }
+
+
 }

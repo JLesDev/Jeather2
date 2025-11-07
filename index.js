@@ -42,9 +42,9 @@ let maxer = -999;
 
 async function getAverages() {
   const baseURL = window.location.origin;
-  const requestURL = baseURL + "/Jeather2/averages.json";
+  // const requestURL = baseURL + "/Jeather2/averages.json";
   // For local hosting: 
-  //const requestURL = "http://127.0.0.1:5500/averages.json";
+  const requestURL = "http://127.0.0.1:5500/averages.json";
   const request = new Request(requestURL);
   const response = await fetch(request);
   let averagesJSON = await response.json();
@@ -244,20 +244,14 @@ async function run(city) {
 
 
 
-  await fetch(String(urls[0])) //1
-    .then((response) => response.json()) //2
+  await fetch(String(urls[0]))
+    .then((response) => response.json())
     .then((observations) => {
-      // console.log(observations);
-      // console.log(observations.data[0].temp);
-      // console.log(observations.notice);
-      // console.log("test");
 
-      let ci = observations.data[0].temp; //3
+      let ci = observations.data[0].temp;
       let ci2 = observations.data[0].temp_feels_like;
       let parent = document.querySelector('#content2');
       const barColors = ["red", "green", "blue", "orange", "brown"];
-
-      // console.log("jo test" + window.callbacks.show_line_ticks);
 
       for (let i = 0; i < 1; i++) {
         let ci = observations.data[i].temp;
@@ -341,13 +335,13 @@ async function run(city) {
         wind.textContent = "Wind: " + (observations.data[i].wind.speed_kilometre) + "km/h " + (observations.data[i].wind.direction);
         let rain = document.createElement('p');
         rain.textContent = "Rain: " + ((observations.data[i].rain.amount.min + observations.data[i].rain.amount.max) / 2) + "mm";
-        
+
         let averageDiff = observations.data[i].temp - averages.averages[0].month[10];
         let avg = document.createElement('h1');
         let brk = document.createElement('hr');
-        if(averageDiff > 0){
+        if (averageDiff > 0) {
           avg.textContent = "This day is hotter than average by " + averageDiff + "°C.";
-        } 
+        }
         else {
           avg.textContent = "This day is cooler than average by " + averageDiff + "°C.";
         }
@@ -373,13 +367,13 @@ async function run(city) {
 
         let timer = new Date();
         let realtimer = new Date(observations.data[i].time);
-   
+
         let now = new Date();
         let currentTime = realtimer.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-  
+
         let nozero = realtimer.getHours().toString();
         let nonzero = nozero.replace(/^0+/, '');
-        
+
         yValues[i] = observations.data[i].temp;
 
         let formatdate = new Date();
@@ -451,7 +445,6 @@ async function run(city) {
 
     }
 
-
     )
     .then((temp) => {
 
@@ -477,7 +470,7 @@ async function run(city) {
       datasets: [{
         label: '',
         pointRadius: 0,
-        borderColor: "pink",     
+        borderColor: "pink",
         fill: true,
         backgroundColor: 'rgba(85, 85, 85, 1)',
         data: yValues
