@@ -42,9 +42,9 @@ let maxer = -999;
 
 async function getAverages() {
   const baseURL = window.location.origin;
-  // const requestURL = baseURL + "/Jeather2/averages.json";
+  const requestURL = baseURL + "/Jeather2/averages.json";
   // For local hosting: 
-  const requestURL = "http://127.0.0.1:5501/averages.json";
+  // const requestURL = "http://127.0.0.1:5501/averages.json";
   const request = new Request(requestURL);
   const response = await fetch(request);
   let averagesJSON = await response.json();
