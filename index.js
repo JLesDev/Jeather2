@@ -42,9 +42,9 @@ let maxer = -999;
 
 async function getAverages() {
   const baseURL = window.location.origin;
-  const requestURL = baseURL + "/Jeather2/averages.json";
+  // const requestURL = baseURL + "/Jeather2/averages.json";
   // For local hosting: 
-  // const requestURL = "http://127.0.0.1:5500/averages.json";
+  const requestURL = "http://127.0.0.1:5501/averages.json";
   const request = new Request(requestURL);
   const response = await fetch(request);
   let averagesJSON = await response.json();
@@ -202,6 +202,7 @@ function randomQuote() {
   let parent2 = document.getElementById('bot-box');
   let randomInt = Math.floor(Math.random() * 47);
   let actual = document.createElement('p');
+  actual.id = 'quote';
   actual.textContent = quotes[randomInt];
   parent2.appendChild(actual);
 }
@@ -317,8 +318,11 @@ async function run(city) {
             defualt: "Unknown time!";
             break;
         }
-        p.textContent = formatTime + ". Temp: " + observations.data[i].temp + "°C. Jonty's Temp: " + (observations.data[i].temp_feels_like + 3) + "°C.";
+        let jont = document.createElement('p');
+        jont.textContent =  "Jont's Temp: " + (observations.data[i].temp_feels_like + 3) + "°C.";
+        p.textContent = formatTime + ". Temp: " + observations.data[i].temp + "°C.";
         parent.appendChild(p);
+        parent.appendChild(jont);
         let q = document.createElement('p');
         q.textContent = "UV: " + observations.data[i].uv + "."
         let uv = document.createElement('p');
@@ -332,12 +336,12 @@ async function run(city) {
         // }
 
         let wind = document.createElement('p');
-        wind.textContent = "Wind: " + (observations.data[i].wind.speed_kilometre) + "km/h " + (observations.data[i].wind.direction);
+        wind.textContent = "Wind: " + (observations.data[i].wind.speed_kilometre) + "km/h " + (observations.data[i].wind.direction) + "    ";
         let rain = document.createElement('p');
         rain.textContent = "Rain: " + ((observations.data[i].rain.amount.min + observations.data[i].rain.amount.max) / 2) + "mm";
 
         let averageDiff = observations.data[i].temp - averages.averages[0].month[10];
-        let avg = document.createElement('h1');
+        let avg = document.createElement('p');
         let brk = document.createElement('hr');
         if (averageDiff > 0) {
           avg.textContent = "This day is hotter than average by " + averageDiff + "°C.";
@@ -349,8 +353,9 @@ async function run(city) {
         parent.appendChild(q);
         parent.appendChild(uv);
         parent.appendChild(wind);
+        // parent.appendChild(document.createElement('br'));
         parent.appendChild(rain);
-        parent.appendChild(brk);
+        // parent.appendChild(brk);
         parent.appendChild(avg);
       }
 
