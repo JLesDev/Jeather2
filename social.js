@@ -57,7 +57,7 @@ async function run () {
   console.log('write')
   writeMessages()
 
-  // let a = await call_prog();
+  let a = await call_prog();
 }
 
 let messages = []
