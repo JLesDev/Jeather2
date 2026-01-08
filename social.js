@@ -217,7 +217,7 @@ async function writeMessages() {
   let content = document.getElementById('social-content')
   content.innerHTML = ''
 
-  for (let i = 0; i < message_count; i++) {
+  for (let i = message_count; i > 0; i--) {
     console.log('in')
     let temp_message = document.createElement('p')
 
