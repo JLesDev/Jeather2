@@ -7,7 +7,9 @@
   --accent: #23b364;
 }
 
-body, p, span {
+body,
+p,
+span {
   color: var(--fg-color);
 }
 
@@ -33,7 +35,9 @@ html {
   font-size: 16px;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: inherit;
 }
 
@@ -79,6 +83,32 @@ html {
   filter: blur(80px);
   z-index: -1;
 }
+
+#bot-box-social {
+  border-style: solid;
+  border-width: 0.3rem 0rem 0rem 0rem;
+  border-color: #000;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  position: fixed;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+
+  margin: 0;
+  color: #f5f5f5;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+}
+
 
 
 #bot-box {
@@ -164,7 +194,8 @@ h1 {
   text-align: left;
 }
 
-p, a {
+p,
+a {
   font-size: 1.5rem;
   font-weight: 600;
   line-height: 1.6;
@@ -192,7 +223,8 @@ p, a {
   }
 }
 
-h1, h2 {
+h1,
+h2 {
   text-align: center;
   margin: 1rem 0;
 }
@@ -422,7 +454,8 @@ hr {
 
 
 
-  p, h3 {
+  p,
+  h3 {
     font-size: 1.8rem;
     max-width: 800px;
     line-height: 1.8;
@@ -849,12 +882,15 @@ radial-gradient(circle at 70% 80%, rgba(219, 219, 219, 0.781), transparent 40%);
     margin-bottom: 1rem;
   }
 
-  #startButton, #multiplayer, .room {
+  #startButton,
+  #multiplayer,
+  .room {
     margin: 2rem;
     font-size: 3rem;
   }
 
-  p, a {
+  p,
+  a {
     font-size: 4.05rem;
     line-height: 1.6;
   }
@@ -887,6 +923,11 @@ radial-gradient(circle at 70% 80%, rgba(219, 219, 219, 0.781), transparent 40%);
     padding: 0.55rem 1rem;
   }
 
+  #send {
+    margin: 2rem;
+    font-size: 3rem;
+  }
+
   #button-row {
     flex-wrap: wrap;
     justify-content: center;
@@ -910,14 +951,6 @@ radial-gradient(circle at 70% 80%, rgba(219, 219, 219, 0.781), transparent 40%);
     font-size: 1.8rem;
   }
 
-
-  /* body::before,
-  #big-box::before,
-  #bot-box::before,
-  #more-box::before {
-     filter: blur(40px); 
-  } */
-
   input {
     border-radius: 4rem;
     height: 5rem;
@@ -935,7 +968,7 @@ radial-gradient(circle at 70% 80%, rgba(219, 219, 219, 0.781), transparent 40%);
 
 input {
   border-radius: 4rem;
-  height: 2rem;
+  height: 4rem;
   color: var(--fg-color);
   width: 100%;
   font-size: 1.5rem;
@@ -944,10 +977,101 @@ input {
 }
 
 #rutton::-webkit-scrollbar {
-display: none;
+  display: none;
 }
 
 #rutton {
--ms-overflow-style: none; 
-scrollbar-width: none; 
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+#bottom {
+  display: grid;
+  margin: 3rem 8rem 0rem 8rem;
+  align-items: right;
+  justify-content: right;
+}
+
+#social {
+  margin: 0rem 0rem 1rem;
+  padding: 1rem 1.2rem;
+  font-size: 4rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  pointer-events: auto;
+  touch-action: manipulation;
+
+  /* border-radius: 0.3rem; */
+  border-style: solid;
+  border-width: 0.3rem;
+  border-color: #504a39;
+
+  background: rgba(255, 255, 255, 0.08);
+  color: #504a39;
+  backdrop-filter: blur(6px);
+
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+#social:hover,
+#social:focus {
+  background: rgba(236, 213, 194, 0.788);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(236, 213, 194, 0.788);
+}
+
+#social:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+#send {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  margin: 0.1rem 0.3rem 2rem 0.3rem;
+  font-size: 4rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  background: var(--accent);
+  color: #fff;
+  transition: background 0.25s ease;
+}
+
+#send:hover {
+  background: #364fcc;
+}
+
+.row2 {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 90%;
+  margin-bottom: 0.2rem;
+}
+
+.row3 {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 70%;
+  margin-bottom: 0.2rem;
+}
+
+input {
+  font-size: 3.5rem;
+  font-weight: bold;
+}
+
+label {
+  font-size: 4rem;
+  font-weight: bold;
+
 }

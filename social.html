@@ -1,0 +1,82 @@
+<html>
+
+<head>
+    <meta charset="%UTF-8" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <title>Australian Weather</title>
+</head>
+
+<body>
+    <script type="module" src="./social.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z973RHYC5W"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-Z973RHYC5W');
+    </script>
+
+    <link rel="stylesheet" href="style-access.css">
+
+    <div id="top-box">
+        <h1>Jeather 2</h1>
+        <nav class="city-nav">
+            <button class="city-btn" id="melb">Melbourne</button>
+            <button class="city-btn" id="adel">Adelaide</button>
+            <button class="city-btn" id="sydn">Sydney</button>
+            <button class="city-btn" id="bris">Brisbane</button>
+            <button class="city-btn" id="more">More</button>
+        </nav>
+    </div>
+    <hr>
+
+    <!-- <div id="feels-div">
+    <h2 id="feels2">You are valued.</h2>
+  </div> -->
+    <h1 id="placeholder2">Talk about the weather!</h1>
+    <div id="content">
+        <div id="content2">
+        </div>
+    </div>
+
+    <script type="module">
+        import * as root from './pkg/hot_or_not_3.js'
+
+        // myChart.destroy();
+        window.callbacks = root;
+        window.mutate_chart_object = function (v) {
+            if (v.id == ("bar")) {
+                v.options.scales.y1.ticks = {
+                    callback:
+                        function (value, _index, _values) {
+                            return '$' + value.toFixed(2);
+                        }
+                };
+            }
+            //v.destroy();
+            return v
+        };
+    </script>
+
+   <div id="bot-box-social">
+  <div class="row2">
+    <label>Name:</label>
+    <input id="name">
+  </div>
+
+  <div class="row2">
+    <label>Message:</label>
+    <input id="message">
+  </div>
+
+  <button id="send">Send</button>
+</div>
+</body>
+
+</html>

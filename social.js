@@ -204,7 +204,7 @@ function randomQuote() {
   let actual = document.createElement('p');
   actual.id = 'quote';
   actual.textContent = quotes[randomInt];
-  parent2.appendChild(actual);
+  // parent2.appendChild(actual);
 }
 async function run(city) {
   await init();
@@ -525,11 +525,66 @@ function removeData(chart) {
   chart.update();
 }
 
-document.getElementById("social").addEventListener("click", function (e) {
-  // runner(0);
-  window.location.href = "social.html";
-});
+let messages = []
 
+async function sendMessage() {
+  let name = document.getElementById('name').value
+
+  document.getElementById('name').value = '';
+
+  console.log(name)
+
+  let message = document.getElementById('message').value
+
+  document.getElementById('message').value = '';
+
+  const d = new Date();
+  let time = d.getTime();
+
+  let minutes = d.getUTCMinutes();
+  let hours = d.getUTCHours();
+  let day = d.getUTCDate();
+  let month = d.getUTCMonth();
+
+  console.log(time)
+  console.log(minutes)
+  console.log(hours)
+  console.log(day)
+  console.log(month)
+
+  await fetch(
+    'https://script.google.com/macros/s/AKfycbzX0DmUX_b5BTwMkrV3BleUkUHqtIECeiaNXq46Orn5wUmZnPNqkUTaAs2qo8VfJs6eoA/exec',
+    {
+      method: 'POST',
+      body: JSON.stringify({
+        key: 'Melbourne' + day + ' chat',
+        value: name + " says: " + message
+      })
+    }
+  )
+}
+
+async function getMessages(day) {
+    await fetch(
+    'https://script.google.com/macros/s/AKfycbzX0DmUX_b5BTwMkrV3BleUkUHqtIECeiaNXq46Orn5wUmZnPNqkUTaAs2qo8VfJs6eoA/exec?key=Melbourne' + day + ' chat'
+  )
+    .then(res => res.text())
+    .then(value => {
+      messages.pop(value)
+      // console.log('Cloud wins:', value)
+    })
+
+}
+
+async function writeMessages(){
+  let content = document.getElementById('')
+
+
+}
+
+document.getElementById("send").addEventListener("click", function (e) {
+  sendMessage();
+});
 
 document.getElementById("melb").addEventListener("click", function (e) {
   runner(0);
