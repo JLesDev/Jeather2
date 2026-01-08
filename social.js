@@ -194,6 +194,18 @@ async function getMessages (day, num_messages) {
     .then(res => res.text())
     .then(value => {
       console.log('this is the value of message ' + i +": "+ value)
+      let content = document.getElementById('social-content')
+      
+      // content.innerHTML = 'Loading messages... ' + i + '/' + message_count;
+      
+      content.innerHTML = ''
+
+      let p = document.createElement('p')
+
+      p.innerText = 'Loading messages... ' + i + '/' + message_count;
+
+      content.appendChild(p);
+
       messages.push(value)
       // writeMessages()
     })
@@ -201,7 +213,7 @@ async function getMessages (day, num_messages) {
   console.log('finished getting messages')
 }
 
-async function writeMessages () {
+async function writeMessages() {
   let content = document.getElementById('social-content')
   content.innerHTML = ''
 
