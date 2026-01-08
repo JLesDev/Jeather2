@@ -318,10 +318,45 @@ async function run(city) {
             defualt: "Unknown time!";
             break;
         }
-        // p.textContent = formatTime + ". Temp: " + observations.data[i].temp + "°C.";
-        // parent.appendChild(p);
+         let jont = document.createElement('p');
+        jont.textContent =  "Jont's Temp: " + (observations.data[i].temp_feels_like + 3) + "°C.";
+        p.textContent = formatTime + ". Temp: " + observations.data[i].temp + "°C.";
+        parent.appendChild(p);
+        parent.appendChild(jont);
+        let q = document.createElement('p');
+        q.textContent = "UV: " + observations.data[i].uv + "."
+        let uv = document.createElement('p');
+        uv.textContent = "Humidity: " + (observations.data[i].relative_humidity) + "%.";
+        let wind_dir = "South";
 
+        // for direction formatting --
 
+        // switch ((observations.data[i].wind.direction)){
+        //   "S"
+        // }
+
+        let wind = document.createElement('p');
+        wind.textContent = "Wind: " + (observations.data[i].wind.speed_kilometre) + "km/h " + (observations.data[i].wind.direction) + "    ";
+        let rain = document.createElement('p');
+        rain.textContent = "Rain: " + ((observations.data[i].rain.amount.min + observations.data[i].rain.amount.max) / 2) + "mm";
+
+        let averageDiff = observations.data[i].temp - averages.averages[0].month[10];
+        let avg = document.createElement('p');
+        let brk = document.createElement('hr');
+        if (averageDiff > 0) {
+          avg.textContent = "This day is hotter than average by " + averageDiff + "°C.";
+        }
+        else {
+          avg.textContent = "This day is cooler than average by " + averageDiff + "°C.";
+        }
+
+        parent.appendChild(q);
+        parent.appendChild(uv);
+        parent.appendChild(wind);
+        // parent.appendChild(document.createElement('br'));
+        parent.appendChild(rain);
+        // parent.appendChild(brk);
+        parent.appendChild(avg);
       }
 
       for (let i = 24; i > -1; i--) {
