@@ -44,7 +44,7 @@ async function getAverages() {
   const baseURL = window.location.origin;
   // const requestURL = baseURL + "/Jeather2/averages.json";
   // For local hosting: 
-  const requestURL = "http://127.0.0.1:5500/averages.json";
+  // const requestURL = "http://127.0.0.1:5500/averages.json";
   const request = new Request(requestURL);
   const response = await fetch(request);
   let averagesJSON = await response.json();
@@ -573,7 +573,6 @@ async function getMessages(day) {
       messages.pop(value)
       // console.log('Cloud wins:', value)
     })
-
 }
 
 async function writeMessages(){
