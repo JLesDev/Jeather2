@@ -4,8 +4,8 @@ await init();
 import * as root from './pkg/hot_or_not_3.js'
 
 window.callbacks = root;
-console.log("test");
-console.log(window.callbacks);
+// console.log("test");
+// console.log(window.callbacks);
 window.mutate_chart_object = function (v) {
   if (v.id == ("bar")) {
     v.options.scales.y1.ticks = {
@@ -40,489 +40,23 @@ function cityText(city) {
 let miner = 999;
 let maxer = -999;
 
-async function getAverages() {
-  const baseURL = window.location.origin;
-  // const requestURL = baseURL + "/Jeather2/averages.json";
-  // For local hosting: 
-  // const requestURL = "http://127.0.0.1:5500/averages.json";
-  const request = new Request(requestURL);
-  const response = await fetch(request);
-  let averagesJSON = await response.json();
-  return averagesJSON;
-}
+async function run() {
+  const d = new Date();
+  let time = d.getTime();
 
-let averages = await getAverages();
+  let minutes = d.getUTCMinutes();
+  let hours = d.getUTCHours();
+  let day = d.getUTCDate();
+  let month = d.getUTCMonth();
 
-let quotes = [
-  "If you’re offered a seat on a rocket ship, don’t ask what seat! Just get on. Sheryl Sandberg"
-  ,
-
-  "First, have a definite, clear practical ideal; a goal, an objective. Second, have the necessary means to achieve your ends; wisdom, money, materials, and methods. Third, adjust all your means to that end. Aristotle"
-  ,
-
-  "If the wind will not serve, take to the oars. Latin Proverb"
-  ,
-
-  "You can’t fall if you don’t climb.  But there’s no joy in living your whole life on the ground. Unknown"
-  ,
-
-  "We must believe that we are gifted for something, and that this thing, at whatever cost, must be attained. Marie Curie"
-  ,
-
-  "Too many of us are not living our dreams because we are living our fears. Les Brown"
-  ,
-
-  "Challenges are what make life interesting and overcoming them is what makes life meaningful. Joshua J. Marine"
-  ,
-
-  "If you want to lift yourself up, lift up someone else. Booker T. Washington"
-  ,
-
-  "I have been impressed with the urgency of doing. Knowing is not enough; we must apply. Being willing is not enough; we must do. Leonardo da Vinci"
-  ,
-
-  "Limitations live only in our minds.  But if we use our imaginations, our possibilities become limitless. Jamie Paolinetti"
-  ,
-
-  "You take your life in your own hands, and what happens? A terrible thing, no one to blame. Erica Jong"
-  ,
-
-  "What’s money? A man is a success if he gets up in the morning and goes to bed at night and in between does what he wants to do. Bob Dylan"
-  ,
-
-  "I didn’t fail the test. I just found 100 ways to do it wrong. Benjamin Franklin"
-  ,
-
-  "In order to succeed, your desire for success should be greater than your fear of failure. Bill Cosby"
-  ,
-
-  "A person who never made a mistake never tried anything new.  Albert Einstein"
-  ,
-
-  "The person who says it cannot be done should not interrupt the person who is doing it. Chinese Proverb"
-  ,
-
-  "There are no traffic jams along the extra mile. Roger Staubach"
-  ,
-
-  "It is never too late to be what you might have been. George Eliot"
-  ,
-
-  "You become what you believe. Oprah Winfrey"
-  ,
-
-  "I would rather die of passion than of boredom. Vincent van Gogh"
-  ,
-
-  "A truly rich man is one whose children run into his arms when his hands are empty. Unknown"
-  ,
-
-  "It is not what you do for your children, but what you have taught them to do for themselves, that will make them successful human beings. Ann Landers"
-  ,
-
-  "If you want your children to turn out well, spend twice as much time with them, and half as much money. Abigail Van Buren"
-  ,
-
-  "Build your own dreams, or someone else will hire you to build theirs. Farrah Gray"
-  ,
-
-  "The battles that count aren’t the ones for gold medals. The struggles within yourself–the invisible battles inside all of us–that’s where it’s at. Jesse Owens"
-  ,
-
-  "Education costs money.  But then so does ignorance. Sir Claus Moser"
-  ,
-
-  "I have learned over the years that when one’s mind is made up, this diminishes fear. Rosa Parks"
-  ,
-
-  "It does not matter how slowly you go as long as you do not stop. Confucius"
-  ,
-
-  "If you look at what you have in life, you’ll always have more. If you look at what you don’t have in life, you’ll never have enough. Oprah Winfrey"
-  ,
-
-  "Remember that not getting what you want is sometimes a wonderful stroke of luck. Dalai Lama"
-  ,
-
-  "You can’t use up creativity.  The more you use, the more you have. Maya Angelou"
-  ,
-
-  "Dream big and dare to fail. Norman Vaughan"
-  ,
-
-  "Our lives begin to end the day we become silent about things that matter. Martin Luther King Jr."
-  ,
-
-  "Do what you can, where you are, with what you have. Teddy Roosevelt"
-  ,
-
-  "If you do what you’ve always done, you’ll get what you’ve always gotten. Tony Robbins"
-  ,
-
-  "Dreaming, after all, is a form of planning. Gloria Steinem"
-  ,
-
-  "It’s your place in the world; it’s your life. Go on and do all you can with it, and make it the life you want to live. Mae Jemison"
-  ,
-
-  "You may be disappointed if you fail, but you are doomed if you don’t try. Beverly Sills"
-  ,
-
-  "Remember no one can make you feel inferior without your consent. Eleanor Roosevelt"
-  ,
-
-  "Life is what we make it, always has been, always will be. Grandma Moses"
-  ,
-
-  "The question isn’t who is going to let me; it’s who is going to stop me. Ayn Rand"
-  ,
-
-  "When everything seems to be going against you, remember that the airplane takes off against the wind, not with it. Henry Ford"
-  ,
-
-  "It’s not the years in your life that count. It’s the life in your years. Abraham Lincoln"
-  ,
-
-  "Change your thoughts and you change your world. Norman Vincent Peale"
-  ,
-
-  "Either write something worth reading or do something worth writing. Benjamin Franklin"
-  ,
-
-  "Nothing is impossible, the word itself says, “I’m possible!” –Audrey Hepburn"
-  ,
-
-  "The only way to do great work is to love what you do. Steve Jobs"
-  ,
-
-  "If you can dream it, you can achieve it. Zig Ziglar"
-];
-
-function randomQuote() {
-  let parent2 = document.getElementById('bot-box');
-  let randomInt = Math.floor(Math.random() * 47);
-  let actual = document.createElement('p');
-  actual.id = 'quote';
-  actual.textContent = quotes[randomInt];
-  // parent2.appendChild(actual);
-}
-async function run(city) {
   await init();
-  randomQuote();
-  let a = await call_prog();
-  //test("https://reg.bom.gov.au/fwo/IDV60901/IDV60901.95936.json");
-  const url = "https://api.weather.bom.gov.au/v1/locations/r1r143/forecasts/hourly";
-  const urls = [
-    "https://api.weather.bom.gov.au/v1/locations/r1r143/forecasts/hourly",
-    "https://api.weather.bom.gov.au/v1/locations/r1f966/forecasts/hourly",
-    "http://www.bom.gov.au/fwo/IDV60901/IDV60901.94854.json"
-  ];
-  const url2 = "https://api.weather.bom.gov.au/v1/locations/r1r143/forecasts/hourly";
-  const headers = {
-    'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'POST,PATCH,OPTIONS'
-  }
+  console.log('loaded');
+  await getMessages(day);
+  console.log('write')
+  writeMessages();
 
-  const response = {
-    statusCode: 200,
-    headers: headers,
-    body: JSON.stringify(urls[city]),
-  };
+  // let a = await call_prog();
 
-  const responses = {
-    statusCode: 200,
-    headers: headers,
-    body: JSON.stringify(url2),
-  };
-
-  // console.log(response);
-
-  const xValues = [];
-  const yValues = [];
-  const xValues2 = [];
-  const yValues2 = [];
-
-
-
-  await fetch(String(urls[0]))
-    .then((response) => response.json())
-    .then((observations) => {
-
-      let ci = observations.data[0].temp;
-      let ci2 = observations.data[0].temp_feels_like;
-      let parent = document.querySelector('#content2');
-      const barColors = ["red", "green", "blue", "orange", "brown"];
-
-      for (let i = 0; i < 1; i++) {
-        let ci = observations.data[i].temp;
-        let p = document.createElement('p');
-        let timer = new Date();
-        let realtimer = new Date(observations.data[i].time);
-        let now = new Date();
-        let currentTime = realtimer.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-        let nozero = realtimer.getHours().toString();
-        let nonzero = nozero.replace(/^0+/, '');
-        let formatTime = nozero;
-        let date = new Date();
-        let dateform = date.toLocaleDateString();
-        switch (nozero.toString()) {
-          case "0": formatTime = dateform;
-            break;
-          case "1": formatTime = "1am";
-            break;
-          case "2": formatTime = "2am";
-            break;
-          case "3": formatTime = "3am";
-            break;
-          case "4": formatTime = "4am";
-            break;
-          case "5": formatTime = "5am";
-            break;
-          case "6": formatTime = "6am";
-            break;
-          case "7": formatTime = "7am";
-            break;
-          case "8": formatTime = "8am";
-            break;
-          case "9": formatTime = "9am";
-            break;
-          case "10": formatTime = "10am";
-            break;
-          case "11": formatTime = "11am";
-            break;
-          case "12": formatTime = "12pm";
-            break;
-          case "13": formatTime = "1pm";
-            break;
-          case "14": formatTime = "2pm";
-            break;
-          case "15": formatTime = "3pm";
-            break;
-          case "16": formatTime = "4pm";
-            break;
-          case "17": formatTime = "5pm";
-            break;
-          case "18": formatTime = "6pm";
-            break;
-          case "19": formatTime = "7pm";
-            break;
-          case "20": formatTime = "8pm";
-            break;
-          case "21": formatTime = "9pm";
-            break;
-          case "22": formatTime = "10pm";
-            break;
-          case "23": formatTime = "11pm";
-            break;
-            defualt: "Unknown time!";
-            break;
-        }
-        // p.textContent = formatTime + ". Temp: " + observations.data[i].temp + "°C.";
-        // parent.appendChild(p);
-
-
-      }
-
-      for (let i = 24; i > -1; i--) {
-        let ci = observations.data[i].temp;
-        if (ci < miner) {
-          miner = ci;
-        }
-        if (ci > maxer) {
-          maxer = ci;
-        }
-
-        let p = document.createElement('p');
-
-        let timer = new Date();
-        let realtimer = new Date(observations.data[i].time);
-
-        let now = new Date();
-        let currentTime = realtimer.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-
-        let nozero = realtimer.getHours().toString();
-        let nonzero = nozero.replace(/^0+/, '');
-
-        yValues[i] = observations.data[i].temp;
-
-        let formatdate = new Date();
-        let nextdate = formatdate.toLocaleDateString();
-
-        if (observations.data[i].time === "undefined") {
-          xValues[i] = "Not found";
-        }
-        else {
-          let formatTime = nozero;
-          switch (nozero.toString()) {
-            case "0": formatTime = nextdate;
-              break;
-            case "1": formatTime = "1am";
-              break;
-            case "2": formatTime = "2am";
-              break;
-            case "3": formatTime = "3am";
-              break;
-            case "4": formatTime = "4am";
-              break;
-            case "5": formatTime = "5am";
-              break;
-            case "6": formatTime = "6am";
-              break;
-            case "7": formatTime = "7am";
-              break;
-            case "8": formatTime = "8am";
-              break;
-            case "9": formatTime = "9am";
-              break;
-            case "10": formatTime = "10am";
-              break;
-            case "11": formatTime = "11am";
-              break;
-            case "12": formatTime = "12pm";
-              break;
-            case "13": formatTime = "1pm";
-              break;
-            case "14": formatTime = "2pm";
-              break;
-            case "15": formatTime = "3pm";
-              break;
-            case "16": formatTime = "4pm";
-              break;
-            case "17": formatTime = "5pm";
-              break;
-            case "18": formatTime = "6pm";
-              break;
-            case "19": formatTime = "7pm";
-              break;
-            case "20": formatTime = "8pm";
-              break;
-            case "21": formatTime = "9pm";
-              break;
-            case "22": formatTime = "10pm";
-              break;
-            case "23": formatTime = "11pm";
-              break;
-              defualt: "Unknown time!";
-              break;
-          };
-          xValues[i] = formatTime;
-        }
-
-        parent.appendChild(p);
-      }
-
-
-    }
-
-    )
-    .then((temp) => {
-
-    }
-    );
-
-  const plugin = {
-    id: 'customCanvasBackgroundColor',
-    beforeDraw: (chart, args, options) => {
-      const { ctx } = chart;
-      ctx.save();
-      ctx.globalCompositeOperation = 'destination-over';
-      ctx.fillStyle = options.color || '#99ffff';
-      ctx.fillRect(0, 0, chart.width, chart.height);
-      ctx.restore();
-    }
-  };
-
-  new Chart("myChart", {
-    type: "line",
-    data: {
-      labels: xValues,
-      datasets: [{
-        label: '',
-        pointRadius: 0,
-        borderColor: "pink",
-        fill: true,
-        backgroundColor: 'rgba(85, 85, 85, 1)',
-        data: yValues
-      }
-      ]
-    },
-    options: {
-      label: {
-        display: false
-      },
-      legend: {
-        display: false
-      },
-      tooltips: {
-        enabled: false
-      },
-
-      plugins: {
-        customCanvasBackgroundColor: {
-          color: '#121213',
-        },
-        legend: {
-          display: false
-        },
-      },
-      datalabels: {
-        display: false
-      },
-      title: {
-        display: false,
-        fontColor: 'white',
-        text: "yessir",
-      },
-      scales: {
-        x: {
-
-          title: false,
-          ticks: {
-            color: 'rgba(190, 190, 190, 1)'
-          }
-        },
-        y: {
-          max: maxer + 2,
-          min: miner - 2,
-          ticks: {
-            color: 'rgba(190, 190, 190, 1)'
-          }
-        },
-      },
-    },
-
-    plugins: [plugin],
-  });
-
-  var z = document.createElement("h2");
-  z.setAttribute("id", "placeholder");
-  document.body.appendChild(z);
-
-  function readMore() {
-    var dots = document.getElementById("dots");
-    var moreText = document.getElementById("more");
-    var btnText = document.getElementById("myBtn");
-
-    if (dots.style.display === "none") {
-      dots.style.display = "inline";
-      btnText.innerHTML = "Display more";
-      moreText.style.display = "none";
-    } else {
-      dots.style.display = "none";
-      btnText.innerHTML = "Display less";
-      moreText.style.display = "inline";
-    }
-  }
-}
-
-
-function removeData(chart) {
-  chart.data.labels.pop();
-  chart.data.datasets.forEach((dataset) => {
-    dataset.data.pop();
-  });
-  chart.update();
 }
 
 let messages = []
@@ -565,20 +99,32 @@ async function sendMessage() {
 }
 
 async function getMessages(day) {
+  console.log('start get messages')
+  console.log(day)
     await fetch(
-    'https://script.google.com/macros/s/AKfycbzX0DmUX_b5BTwMkrV3BleUkUHqtIECeiaNXq46Orn5wUmZnPNqkUTaAs2qo8VfJs6eoA/exec?key=Melbourne' + day + ' chat'
-  )
-    .then(res => res.text())
-    .then(value => {
-      messages.pop(value)
-      // console.log('Cloud wins:', value)
-    })
+      'https://script.google.com/macros/s/AKfycbzX0DmUX_b5BTwMkrV3BleUkUHqtIECeiaNXq46Orn5wUmZnPNqkUTaAs2qo8VfJs6eoA/exec?key=Melbourne' + day + ' chat'
+    )
+      .then(res => res.text())
+      .then(value => {
+        messages.push(value)
+      })
+    console.log('done get messages')
+    console.log(messages)
 }
 
-async function writeMessages(){
-  let content = document.getElementById('')
+async function writeMessages() {
+  let content = document.getElementById('social-content')
 
+  for (let i = 0; i < messages.length; i++) {
+    console.log('in')
+    let temp_message = document.createElement('p');
 
+    console.log(temp_message)
+
+    temp_message.textContent = messages[i]
+
+    content.appendChild(temp_message)
+  }
 }
 
 document.getElementById("send").addEventListener("click", function (e) {
