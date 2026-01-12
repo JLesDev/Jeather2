@@ -236,14 +236,8 @@ async function run(city) {
     body: JSON.stringify(url2),
   };
 
-  // console.log(response);
-
   const xValues = [];
   const yValues = [];
-  const xValues2 = [];
-  const yValues2 = [];
-
-
 
   await fetch(String(urls[0]))
     .then((response) => response.json())
@@ -353,9 +347,7 @@ async function run(city) {
         parent.appendChild(q);
         parent.appendChild(uv);
         parent.appendChild(wind);
-        // parent.appendChild(document.createElement('br'));
         parent.appendChild(rain);
-        // parent.appendChild(brk);
         parent.appendChild(avg);
       }
 
@@ -561,7 +553,6 @@ function removeData(chart) {
 }
 
 document.getElementById("social").addEventListener("click", function (e) {
-  // runner(0);
   window.location.href = "social.html";
 });
 
