@@ -1,5 +1,5 @@
 import init, {
-  /*get_weather_name, get_url,*/ call_prog,
+  call_prog,
   show_line_ticks
 } from './pkg/hot_or_not_3.js'
 await init()
@@ -7,8 +7,6 @@ await init()
 import * as root from './pkg/hot_or_not_3.js'
 
 window.callbacks = root
-// console.log("test");
-// console.log(window.callbacks);
 window.mutate_chart_object = function (v) {
   if (v.id == 'bar') {
     v.options.scales.y1.ticks = {
@@ -52,13 +50,13 @@ async function run() {
 
   await init()
   await loading()
-  console.log('loaded')
+  // console.log('loaded')
   await getMessages(day)
-  console.log('write')
+  // console.log('write')
   writeMessages()
 
    if (message_count == 0 || isNaN(message_count) == true) {
-    console.log('yes, there are no messages')
+    // console.log('yes, there are no messages')
 
     let content = document.getElementById('social-content')
 
@@ -71,7 +69,7 @@ async function run() {
     content.appendChild(p);
   }
 
-  let a = await call_prog();
+  // let a = await call_prog();
 }
 
 let messages = []
@@ -120,7 +118,7 @@ async function loading() {
 
   content.innerHTML = ''
 
-  console.log('loading content')
+  // console.log('loading content')
 
   let temp_message = document.createElement('p')
 
@@ -139,7 +137,7 @@ async function getMessageCount() {
     .then(value => {
       let num_messages = Number(value)
       message_count = Number(value)
-      console.log(num_messages)
+      // console.log(num_messages)
       return num_messages
     })
 }
@@ -150,21 +148,21 @@ async function sendMessage() {
   await getMessageCount()
 
   let num_messages = message_count
-  console.log(num_messages)
+  // console.log(num_messages)
 
   document.getElementById('name').value = ''
 
-  console.log(name)
+  // console.log(name)
 
   let message = document.getElementById('message').value
 
   document.getElementById('message').value = ''
 
-  console.log(time)
-  console.log(minutes)
-  console.log(hours)
-  console.log(day)
-  console.log(month)
+  // console.log(time)
+  // console.log(minutes)
+  // console.log(hours)
+  // console.log(day)
+  // console.log(month)
 
   await fetch(
     'https://script.google.com/macros/s/AKfycbzX0DmUX_b5BTwMkrV3BleUkUHqtIECeiaNXq46Orn5wUmZnPNqkUTaAs2qo8VfJs6eoA/exec',
@@ -189,19 +187,19 @@ async function sendMessage() {
       })
     }
   )
-  console.log('posted')
+  // console.log('posted')
   document.getElementById('send').style.backgroundColor = "##23b364";
   document.getElementById('send').innerText = "Send"
 }
 
 async function getMessages(day, num_messages) {
-  console.log('Starting to retrieve messages')
-  console.log('It is the day: ' + day)
+  // console.log('Starting to retrieve messages')
+  // console.log('It is the day: ' + day)
   await getMessageCount()
-  console.log('Message count = ' + message_count)
+  // console.log('Message count = ' + message_count)
     if (message_count == 0 || isNaN(message_count) == true) {
 
-    console.log('yes, there are no messages')
+    // console.log('yes, there are no messages')
 
     let content = document.getElementById('social-content')
 
@@ -221,7 +219,7 @@ async function getMessages(day, num_messages) {
     )
       .then(res => res.text())
       .then(value => {
-        console.log('this is the value of message ' + i + ": " + value)
+        // console.log('this is the value of message ' + i + ": " + value)
         let content = document.getElementById('social-content')
 
         content.innerHTML = ''
@@ -236,7 +234,7 @@ async function getMessages(day, num_messages) {
       })
   }
 
-  console.log('finished getting messages')
+  // console.log('finished getting messages')
 }
 
 async function writeMessages() {
@@ -244,10 +242,10 @@ async function writeMessages() {
   content.innerHTML = ''
 
   for (let i = message_count; i > 0; i--) {
-    console.log('in')
+    // console.log('in')
     let temp_message = document.createElement('p')
 
-    console.log(temp_message)
+    // console.log(temp_message)
 
     temp_message.textContent = messages[i]
 
@@ -262,33 +260,27 @@ document.getElementById('send').addEventListener('click', function (e) {
 })
 
 document.getElementById('melb').addEventListener('click', function (e) {
-  // runner(0)
   window.location.href = 'index.html'
 })
 
 document.getElementById('adel').addEventListener('click', function (e) {
-  // runner(1)
   window.location.href = 'adelaide.html'
 })
 
 document.getElementById('sydn').addEventListener('click', function (e) {
-  // runner(2)
   window.location.href = 'sydney.html'
 })
 
 document.getElementById('bris').addEventListener('click', function (e) {
-  // runner(3)
   window.location.href = 'brisbane.html'
 })
 
 document.getElementById('more').addEventListener('click', function (e) {
-  // runner(3)
   window.location.href = 'more.html'
 })
 
 function runner(city) {
   cityText(city)
-  console.log('RUNNER')
   location.reload
   run(city)
 }

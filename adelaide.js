@@ -213,11 +213,11 @@ async function run(city) {
   //test("https://reg.bom.gov.au/fwo/IDV60901/IDV60901.95936.json");
   const url = "https://api.weather.bom.gov.au/v1/locations/r1f966/forecasts/hourly";
   const urls = [
-    "https://api.weather.bom.gov.au/v1/locations/r1r143/forecasts/hourly",
+    "https://api.weather.bom.gov.au/v1/locations/r1f966/forecasts/hourly",
     "https://api.weather.bom.gov.au/v1/locations/r1f966/forecasts/hourly",
     "http://www.bom.gov.au/fwo/IDV60901/IDV60901.94854.json"
   ];
-  const url2 = "https://api.weather.bom.gov.au/v1/locations/r1r143/forecasts/hourly";
+  const url2 = "https://api.weather.bom.gov.au/v1/locations/r1f966/forecasts/hourly";
   const headers = {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
