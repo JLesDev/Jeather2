@@ -1,21 +1,22 @@
 <html>
+
 <head>
   <meta charset="%UTF-8" />
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <title>Australian Weather</title>
 </head>
+
 <body>
   <script type="module" src="./index.js"></script>
 
-  <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
   </script>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-Z973RHYC5W"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
     gtag('config', 'G-Z973RHYC5W');
@@ -34,7 +35,7 @@
     </nav>
   </div>
   <hr>
-  
+
   <!-- <div id="feels-div">
     <h2 id="feels2">You are valued.</h2>
   </div> -->
@@ -43,7 +44,7 @@
     <div id="content2">
     </div>
   </div>
-  
+
   <script type="module">
     import * as root from './pkg/hot_or_not_3.js'
 
@@ -62,13 +63,14 @@
       return v
     };
   </script>
-      <div id="bottom">
-        <button id="social">
-            Chat
-        </button>
-          </div>
+  <div id="bottom">
+    <button id="social">
+      Chat
+    </button>
+  </div>
   <div id="bot-box">
 
-</div>
+  </div>
 </body>
+
 </html>
