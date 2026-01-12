@@ -20,7 +20,7 @@ window.mutate_chart_object = function (v) {
   return v
 }
 
-function cityText (city) {
+function cityText(city) {
   let parent = document.querySelector('#content2')
   switch (city) {
     case 0:
@@ -41,7 +41,7 @@ function cityText (city) {
 let miner = 999
 let maxer = -999
 
-async function run () {
+async function run() {
   const d = new Date()
   let time = d.getTime()
 
@@ -56,6 +56,20 @@ async function run () {
   await getMessages(day)
   console.log('write')
   writeMessages()
+
+   if (message_count == 0 || isNaN(message_count) == true) {
+    console.log('yes, there are no messages')
+
+    let content = document.getElementById('social-content')
+
+    content.innerHTML = ''
+
+    let p = document.createElement('p')
+
+    p.innerText = 'No messages posted today, be the first!';
+
+    content.appendChild(p);
+  }
 
   let a = await call_prog();
 }
@@ -72,7 +86,7 @@ let month = d.getUTCMonth()
 
 let message_count = 0;
 
-function formatMonth () {
+function formatMonth() {
   switch (month) {
     case 1:
       return 'Jan'
@@ -101,7 +115,7 @@ function formatMonth () {
   }
 }
 
-async function loading () {
+async function loading() {
   let content = document.getElementById('social-content')
 
   content.innerHTML = ''
@@ -116,10 +130,10 @@ async function loading () {
 }
 
 async function getMessageCount() {
-   await fetch(
+  await fetch(
     'https://script.google.com/macros/s/AKfycbzX0DmUX_b5BTwMkrV3BleUkUHqtIECeiaNXq46Orn5wUmZnPNqkUTaAs2qo8VfJs6eoA/exec?key=Melbourne' +
-      day +
-      ' count'
+    day +
+    ' count'
   )
     .then(res => res.text())
     .then(value => {
@@ -162,7 +176,7 @@ async function sendMessage() {
       })
     }
   )
-  if(num_messages == undefined){
+  if (num_messages == undefined) {
     num_messages = 0
   }
   await fetch(
@@ -180,36 +194,48 @@ async function sendMessage() {
   document.getElementById('send').innerText = "Send"
 }
 
-async function getMessages (day, num_messages) {
+async function getMessages(day, num_messages) {
   console.log('Starting to retrieve messages')
   console.log('It is the day: ' + day)
   await getMessageCount()
   console.log('Message count = ' + message_count)
-  for(let i = 0; i < message_count; i++){
-      await fetch(
-    'https://script.google.com/macros/s/AKfycbzX0DmUX_b5BTwMkrV3BleUkUHqtIECeiaNXq46Orn5wUmZnPNqkUTaAs2qo8VfJs6eoA/exec?key=Melbourne' +
+    if (message_count == 0 || isNaN(message_count) == true) {
+
+    console.log('yes, there are no messages')
+
+    let content = document.getElementById('social-content')
+
+    content.innerHTML = ''
+
+    let p = document.createElement('p')
+
+    p.innerText = 'No messages posted today, be the first!';
+
+    content.appendChild(p);
+  }
+  for (let i = 0; i < message_count; i++) {
+    await fetch(
+      'https://script.google.com/macros/s/AKfycbzX0DmUX_b5BTwMkrV3BleUkUHqtIECeiaNXq46Orn5wUmZnPNqkUTaAs2qo8VfJs6eoA/exec?key=Melbourne' +
       day +
       ' chat ' + i
-  )
-    .then(res => res.text())
-    .then(value => {
-      console.log('this is the value of message ' + i +": "+ value)
-      let content = document.getElementById('social-content')
-      
-      // content.innerHTML = 'Loading messages... ' + i + '/' + message_count;
-      
-      content.innerHTML = ''
+    )
+      .then(res => res.text())
+      .then(value => {
+        console.log('this is the value of message ' + i + ": " + value)
+        let content = document.getElementById('social-content')
 
-      let p = document.createElement('p')
+        content.innerHTML = ''
 
-      p.innerText = 'Loading messages... ' + i + '/' + message_count;
+        let p = document.createElement('p')
 
-      content.appendChild(p);
+        p.innerText = 'Loading messages... ' + i + '/' + message_count;
 
-      messages.push(value)
-      // writeMessages()
-    })
+        content.appendChild(p);
+
+        messages.push(value)
+      })
   }
+
   console.log('finished getting messages')
 }
 
@@ -236,31 +262,31 @@ document.getElementById('send').addEventListener('click', function (e) {
 })
 
 document.getElementById('melb').addEventListener('click', function (e) {
-  runner(0)
+  // runner(0)
   window.location.href = 'index.html'
 })
 
 document.getElementById('adel').addEventListener('click', function (e) {
-  runner(1)
+  // runner(1)
   window.location.href = 'adelaide.html'
 })
 
 document.getElementById('sydn').addEventListener('click', function (e) {
-  runner(2)
+  // runner(2)
   window.location.href = 'sydney.html'
 })
 
 document.getElementById('bris').addEventListener('click', function (e) {
-  runner(3)
+  // runner(3)
   window.location.href = 'brisbane.html'
 })
 
 document.getElementById('more').addEventListener('click', function (e) {
-  runner(3)
+  // runner(3)
   window.location.href = 'more.html'
 })
 
-function runner (city) {
+function runner(city) {
   cityText(city)
   console.log('RUNNER')
   location.reload
