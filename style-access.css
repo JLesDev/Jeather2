@@ -1,7 +1,7 @@
 :root {
-  --bg-color: #121213;
+  --bg-color: #2D2926;
   --bg-color-2: #1f1f21;
-  --fg-color: #2f2f2f;
+  --fg-color: #fff8ec;
   --splash-color: #1c1c24;
   --hr-color: #2c2c2c;
   --accent: #23b364;
@@ -15,12 +15,12 @@ span {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg-color: #121213;
-    --bg-color-2: #1f1f21;
-    --fg-color: #2f2f2f;
-    --splash-color: #1c1c24;
-    --hr-color: #2c2c2c;
-    --accent: #1ebe9c;
+  --bg-color: #2D2926;
+  --bg-color-2: #1f1f21;
+  /* --fg-color: #ed6f63; */
+  --splash-color: #1c1c24;
+  --hr-color: #2c2c2c;
+  --accent: #23b364;
   }
 }
 
@@ -49,8 +49,8 @@ html {
   content: "";
   position: absolute;
   inset: 0;
-  background: #ffdec9;
-  filter: blur(80px);
+  background: var(--bg-color);
+  /* filter: blur(80px); */
   z-index: -1000;
 }
 
@@ -63,15 +63,15 @@ html {
   align-items: center;
   padding: 0rem 0rem 1rem 2rem;
   margin: 0;
-  color: #393939;
+  color: #F9EBDE;
   min-height: 17vh;
   overflow: hidden;
   position: relative;
-  background: #ffdec9;
+  background: var(--bg-color);
   /* background: #2e2a2a; */
   backdrop-filter: blur(8px);
   border-style: solid;
-  border-color: #000;
+  border-color: #F9EBDE;
   border-width: 0rem 0rem 0.3rem 0rem;
   flex-direction: column;
 }
@@ -80,14 +80,14 @@ html {
   /* content: ""; */
   position: absolute;
   inset: 0;
-  filter: blur(80px);
+  /* filter: blur(80px); */
   z-index: -1;
 }
 
 #bot-box-social {
   border-style: solid;
   border-width: 0.3rem 0rem 0rem 0rem;
-  border-color: #000;
+  border-color: #F9EBDE;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -114,7 +114,7 @@ html {
 #bot-box {
   border-style: solid;
   border-width: 0.3rem 0rem 0rem 0rem;
-  border-color: #000;
+  border-color: #F9EBDE;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -140,9 +140,9 @@ html {
   content: "";
   position: absolute;
   inset: 0;
-  background: #ffdec9;
+  background: var(--bg-color);
   /* filter: blur(80px); */
-  color: #000;
+  color: #F9EBDE;
   z-index: -1;
 }
 
@@ -154,7 +154,7 @@ html {
 
 body {
   font-family: system-ui, sans-serif;
-  color: var(--fg-color);
+  color: #F9EBDE;
   line-height: 1.5;
   margin: 0 auto;
   /* background:rgba(0, 0, 0, 0.1); */
@@ -167,9 +167,9 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: #ffdec9;
+  background: var(--bg-color);
   /* rgba(0, 0, 0, 0.1); */
-  filter: blur(80px);
+  /* filter: blur(80px); */
   z-index: -1;
   pointer-events: none;
 }
@@ -207,7 +207,7 @@ a {
   font-size: 1rem;
   font-weight: 600;
   line-height: 1.6;
-  color: #000;
+  color: #F9EBDE;
   margin-bottom: 0.7rem;
   text-align: left;
 }
@@ -364,7 +364,7 @@ hr {
 
 
   font-size: 1.5rem;
-  color: var(--fg-color);
+  color: #F9EBDE;
   font-weight: bold;
 
   position: fixed;
@@ -670,7 +670,7 @@ radial-gradient(circle at 70% 80%, rgba(219, 219, 219, 0.781), transparent 40%);
   align-items: center;
   padding: 0rem 1rem 1rem 2rem;
   margin: 0 auto;
-  color: #2a2620;
+  color: #F9EBDE;
   min-height: 17vh;
   overflow: hidden;
   position: relative;
@@ -687,7 +687,7 @@ radial-gradient(circle at 70% 80%, rgba(219, 219, 219, 0.781), transparent 40%);
   align-items: center;
   padding: 0rem 1rem 1rem 1rem;
   margin: 0 auto;
-  color: #2a2620;
+  color: #F9EBDE;
   min-height: 17vh;
   overflow: hidden;
   position: relative;
@@ -728,10 +728,10 @@ radial-gradient(circle at 70% 80%, rgba(219, 219, 219, 0.781), transparent 40%);
   /* border-radius: 0.3rem; */
   border-style: solid;
   border-width: 0.3rem;
-  border-color: #504a39;
+  border-color: #F9EBDE;
 
   background: rgba(255, 255, 255, 0.08);
-  color: #504a39;
+  color: #F9EBDE;
   backdrop-filter: blur(6px);
 
   transition: all 0.3s ease;
@@ -767,7 +767,7 @@ radial-gradient(circle at 70% 80%, rgba(219, 219, 219, 0.781), transparent 40%);
   /* margin: 0.3rem; */
 
   background: rgb(255, 216, 216);
-  color: #2f2f2f;
+  color: #F9EBDE;
   backdrop-filter: blur(6px);
 
   transition: all 0.3s ease;
@@ -935,7 +935,7 @@ radial-gradient(circle at 70% 80%, rgba(219, 219, 219, 0.781), transparent 40%);
   }
 
   .play-btn {
-    border-width: 0.4rem;
+    border-width: 0.5rem;
     font-size: 3.9rem;
     padding: 0.55rem 1rem;
   }
@@ -1023,10 +1023,10 @@ input {
   /* border-radius: 0.3rem; */
   border-style: solid;
   border-width: 0.3rem;
-  border-color: #504a39;
+  border-color: #F9EBDE;
 
   background: rgba(255, 255, 255, 0.08);
-  color: #504a39;
+  color: #F9EBDE;
   backdrop-filter: blur(6px);
 
   transition: all 0.3s ease;
@@ -1091,4 +1091,10 @@ label {
   font-size: 4rem;
   font-weight: bold;
 
+}
+
+::selection {
+    color: rgb(255, 255, 255);
+    background-color: rgb(214, 79, 255);
+    backdrop-filter: invert(100%);
 }
