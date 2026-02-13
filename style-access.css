@@ -971,7 +971,8 @@ radial-gradient(circle at 70% 80%, rgba(219, 219, 219, 0.781), transparent 40%);
   input {
     border-radius: 4rem;
     height: 5rem;
-    color: var(--fg-color);
+    /* color: var(--fg-color); */
+    color: black;
     font-size: 4rem;
     font-weight: bold;
     text-align: center;
@@ -986,7 +987,7 @@ radial-gradient(circle at 70% 80%, rgba(219, 219, 219, 0.781), transparent 40%);
 input {
   border-radius: 4rem;
   height: 4rem;
-  color: var(--fg-color);
+  color: black;
   width: 100%;
   font-size: 1.5rem;
   font-weight: bold;

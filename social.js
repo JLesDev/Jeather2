@@ -48,14 +48,11 @@ async function run() {
   let day = d.getUTCDate()
   let month = d.getUTCMonth()
 
-  await init()
   await loading()
-  // console.log('loaded')
   await getMessages(day)
-  // console.log('write')
-  writeMessages()
+  // writeMessages()
 
-   if (message_count == 0 || isNaN(message_count) == true) {
+  if (message_count == 0 || isNaN(message_count) == true) {
     // console.log('yes, there are no messages')
 
     let content = document.getElementById('social-content')
@@ -164,94 +161,99 @@ async function sendMessage() {
   // console.log(day)
   // console.log(month)
 
-  await fetch(
-    'https://script.google.com/macros/s/AKfycbzX0DmUX_b5BTwMkrV3BleUkUHqtIECeiaNXq46Orn5wUmZnPNqkUTaAs2qo8VfJs6eoA/exec',
-    {
-      method: 'POST',
-      body: JSON.stringify({
-        key: 'Melbourne' + day + ' chat ' + message_count,
-        value: name + ' says: ' + message
-      })
-    }
-  )
+  await fetch("https://chat-api.jontyleslie.workers.dev", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      city: "Melbourne",
+      day: day,
+      name: name,
+      message: message
+    })
+  });
+
   if (num_messages == undefined) {
     num_messages = 0
   }
-  await fetch(
-    'https://script.google.com/macros/s/AKfycbzX0DmUX_b5BTwMkrV3BleUkUHqtIECeiaNXq46Orn5wUmZnPNqkUTaAs2qo8VfJs6eoA/exec',
-    {
-      method: 'POST',
-      body: JSON.stringify({
-        key: 'Melbourne' + day + ' count',
-        value: message_count + 1
-      })
-    }
-  )
   // console.log('posted')
   document.getElementById('send').style.backgroundColor = "##23b364";
   document.getElementById('send').innerText = "Send"
 }
 
-async function getMessages(day, num_messages) {
-  // console.log('Starting to retrieve messages')
-  // console.log('It is the day: ' + day)
-  await getMessageCount()
-  // console.log('Message count = ' + message_count)
-    if (message_count == 0 || isNaN(message_count) == true) {
+async function getMessages(day) {
+  const res = await fetch(
+    "https://chat-api.jontyleslie.workers.dev?city=Melbourne&day=" + day
+  );
 
-    // console.log('yes, there are no messages')
+  messages = await res.json();
+  message_count = messages.length;
 
-    let content = document.getElementById('social-content')
-
-    content.innerHTML = ''
-
-    let p = document.createElement('p')
-
-    p.innerText = 'No messages posted today, be the first!';
-
-    content.appendChild(p);
-  }
-  for (let i = 0; i < message_count; i++) {
-    await fetch(
-      'https://script.google.com/macros/s/AKfycbzX0DmUX_b5BTwMkrV3BleUkUHqtIECeiaNXq46Orn5wUmZnPNqkUTaAs2qo8VfJs6eoA/exec?key=Melbourne' +
-      day +
-      ' chat ' + i
-    )
-      .then(res => res.text())
-      .then(value => {
-        // console.log('this is the value of message ' + i + ": " + value)
-        let content = document.getElementById('social-content')
-
-        content.innerHTML = ''
-
-        let p = document.createElement('p')
-
-        p.innerText = 'Loading messages... ' + i + '/' + message_count;
-
-        content.appendChild(p);
-
-        messages.push(value)
-      })
-  }
-
-  // console.log('finished getting messages')
+  writeMessages();
 }
+
+
+
+// async function getMessages(day, num_messages) {
+//   // console.log('Starting to retrieve messages')
+//   // console.log('It is the day: ' + day)
+//   await getMessageCount()
+//   // console.log('Message count = ' + message_count)
+//     if (message_count == 0 || isNaN(message_count) == true) {
+
+//     // console.log('yes, there are no messages')
+
+//     let content = document.getElementById('social-content')
+
+//     content.innerHTML = ''
+
+//     let p = document.createElement('p')
+
+//     p.innerText = 'No messages posted today, be the first!';
+
+//     content.appendChild(p);
+//   }
+//   for (let i = 0; i < message_count; i++) {
+//     await fetch(
+//       'https://script.google.com/macros/s/AKfycbzX0DmUX_b5BTwMkrV3BleUkUHqtIECeiaNXq46Orn5wUmZnPNqkUTaAs2qo8VfJs6eoA/exec?key=Melbourne' +
+//       day +
+//       ' chat ' + i
+//     )
+//       .then(res => res.text())
+//       .then(value => {
+//         // console.log('this is the value of message ' + i + ": " + value)
+//         let content = document.getElementById('social-content')
+
+//         content.innerHTML = ''
+
+//         let p = document.createElement('p')
+
+//         p.innerText = 'Loading messages... ' + i + '/' + message_count;
+
+//         content.appendChild(p);
+
+//         messages.push(value)
+//       })
+//   }
+
+//   // console.log('finished getting messages')
+// }
 
 async function writeMessages() {
   let content = document.getElementById('social-content')
   content.innerHTML = ''
 
-  for (let i = message_count; i > 0; i--) {
-    // console.log('in')
+  for (let i = 0; i < messages.length; i++) {
     let temp_message = document.createElement('p')
 
-    // console.log(temp_message)
-
-    temp_message.textContent = messages[i]
+    temp_message.textContent =
+      messages[i].name + " says: " + messages[i].message;
 
     content.appendChild(temp_message)
   }
 }
+
 
 document.getElementById('send').addEventListener('click', function (e) {
   document.getElementById('send').style.backgroundColor = "#364fcc";
@@ -281,7 +283,6 @@ document.getElementById('more').addEventListener('click', function (e) {
 
 function runner(city) {
   cityText(city)
-  location.reload
   run(city)
 }
 
